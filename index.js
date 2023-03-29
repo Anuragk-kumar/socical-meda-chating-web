@@ -4,6 +4,10 @@ const app = express();
 const port = 8000;
 // End of Express Entery point 
 
+// use Express Router
+// middleware that is specific to this router
+app.use('/',require('./routes'));
+
 // to chect if Error in running Server
 app.listen(port,function(err){
     if(err){
