@@ -2,6 +2,13 @@
 const express = require('express');
 const app = express();
 const port = 8000;
+
+// require Express-ejs layouts libriary
+const expressLayouts = require('express-ejs-layouts');
+
+app.use(expressLayouts);
+
+
 // End of Express Entery point 
 
 // use Express Router
