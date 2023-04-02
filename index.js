@@ -8,6 +8,10 @@ const port = 8000;
 // middleware that is specific to this router
 app.use('/',require('./routes'));
 
+// set up the view engine
+app.set('view engine','ejs');
+app.set('views','./views');
+
 // to chect if Error in running Server
 app.listen(port,function(err){
     if(err){

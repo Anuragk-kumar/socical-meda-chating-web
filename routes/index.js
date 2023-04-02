@@ -1,17 +1,11 @@
-// this index.js is my entery point to all my routes
-
-
-// Import Express
 const express = require('express');
+ const router = express.Router();
 
-const router = express.Router();
-const homeController = require('../controllers/home_controller');
-console.log('Router loaded');
+ const homeController = require('../controllers/home_controller');
 
-router.get('/', homeController.home);
-router.use('/users',require('./users'));
-router.use('/posts',require('./posts'));
+console.log("router loaded");
 
+router.get('/',homeController.home);
 
 
-module.exports=router;
+ module.exports = router;
