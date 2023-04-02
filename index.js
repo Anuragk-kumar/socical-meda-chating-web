@@ -2,11 +2,16 @@
 const express = require('express');
 const app = express();
 const port = 8000;
-
 // require Express-ejs layouts libriary
 const expressLayouts = require('express-ejs-layouts');
 
+//set up static file
+app.use(express.static('./assets'));
 app.use(expressLayouts);
+
+//extract style and script from sub pages into the layout
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
 
 // End of Express Entery point 
