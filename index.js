@@ -1,9 +1,21 @@
 // Entery point for Express
 const express = require('express');
+// require Cookie parser
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
 // require Express-ejs layouts libriary
 const expressLayouts = require('express-ejs-layouts');
+
+// imoprt mongooDB
+const db = require('./config/mongoose');
+const e = require('express');
+
+app.use(express.urlencoded());
+app.use(cookieParser());
+
+
+
 
 //set up static file
 app.use(express.static('./assets'));
