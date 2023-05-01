@@ -1,22 +1,40 @@
 const Post = require('../models/posts');
-module.exports.home = function(req,res){
-  // console.log(req.cookies);
-  // res.cookie('user_id',25);
-  // Post.find({}, function(ree,posts){
-  //   return res.render('home',{
 
-  //     title: "Codeial | Home",
-  //     posts:posts
-  //   });
+const User = require('../models/user')
+
+
+
+module.exports.home = async function(req,res){
+
+  try{
+    // populated the user of each post
+  let posts =await Post.find({})
+  .sort('-createdAt')
+  .populate('user')
+  .populate({
+    path : 'comments',
+    populate: {
+      path: 'user'
+    },
+    populate: {
+      path: 'likes'
+  }
+}).populate('comments')
+.populate('likes');
+  
+  // .exec(function(err,posts){
+   
   // });
-
-  //populate the user of each post
-  Post.find({}).populate('user').exec(function(err,posts){
-    // console.log(posts);
+  let users =await User.find({});
     return res.render('home',{
 
       title: "Codeial | Home",
-      posts:posts
+      posts: posts,
+      all_users: users
     });
-  });
+  }catch(err){
+    console.log('Error',err);
+    return;
+  }
+
 }

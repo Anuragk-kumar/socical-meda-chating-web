@@ -15,10 +15,20 @@ const e = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+// import passport JWT
+const passportJWT = require('./config/passport-jwt-strategy');
+
+// google auth
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
 // import mongo store
 const MongoStore = require('connect-mongodb-session')(session);
 
+// import Connect Flash
+const flash = require('connect-flash');
+
+// require Connect Flash Middleware
+const customMware = require('./config/middleware');
 
 
 
@@ -32,6 +42,11 @@ app.use(cookieParser());
 //set up static file
 app.use(express.static('./assets'));
 app.use(expressLayouts);
+
+// make the uploads path available to the browser
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
+
 
 //extract style and script from sub pages into the layout
 app.set('layout extractStyles',true);
@@ -70,6 +85,11 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+// for connect Flash 
+app.use(flash());
+
+// use Flash middleware
+app.use(customMware.setFlash);
 
 // use Express Router
 // middleware that is specific to this router
