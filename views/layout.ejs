@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><%= title %> </title>
+    <title> <%= title %> </title>
     <!-- link for NOTY -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
     <!-- Link for jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="<%= assetPath('css/layout.css') %>">
+    <link rel="stylesheet" href="<%= assetPath('css/header.css') %>">
+    <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
     <%- style %>
 </head>
 <body>
-    <!-- inclued header -->
-    <%- include('_header'); %>
-    <!-- for Connect Flash  -->
-    <!-- <% if(flash.success && flash.success.length > 0){%>
-        <h5>
-          <%= flash.success %>  
-        </h5>
-        <% } %> -->
-<main id="layout-main">
+        <%- include('_header'); %>
 
-   <%- body %>
+       
+        
+        <main id="layout-main">
+            <%- body %>
 
-</main>
-<!-- include footer -->
-<%- include('_footer'); %>
-<%- script %>
+        </main>
 
-<script>
-    <% if (flash.success && flash.success.length > 0) {%>
+
+        <%- include('_footer'); %>
+
+        <%- script %>
+
+        <script>
+            <% if (flash.success && flash.success.length > 0) {%>
                 new Noty({
                     theme: 'relax',
                     text: "<%= flash.success %>",
@@ -41,7 +38,8 @@
                     
                 }).show();    
             <%} %>
-    <% if (flash.error && flash.error.length > 0) {%>
+
+            <% if (flash.error && flash.error.length > 0) {%>
                 new Noty({
                     theme: 'relax',
                     text: "<%= flash.error %>",
@@ -51,6 +49,7 @@
                     
                 }).show();    
             <%} %>
-</script>
-</body>
+        </script>
+        
+    </body>
 </html>

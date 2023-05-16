@@ -5,7 +5,7 @@ const router = express.Router();
 // import passport
 const passport = require('passport');
 
-const usersController = require('../controllers/user_controller');
+const usersController = require('../controllers/users_controller');
 
 router.get('/profile/:id', passport.checkAuthentication, usersController.profile);
 router.post('/update/:id', passport.checkAuthentication, usersController.update);

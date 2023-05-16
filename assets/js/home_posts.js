@@ -1,5 +1,11 @@
 {   
     // method to submit the form data for new post using AJAX
+   /* This code defines a function `createPost` that is responsible for submitting a new post form
+   using AJAX. It selects the form element with the ID `new-post-form`, prevents the default form
+   submission behavior, and sends a POST request to the server at the URL `/posts/create` with the
+   serialized form data. If the request is successful, it creates a new post element using the
+   `newPostDom` function and prepends it to the list of posts on the page. It also attaches a click
+   event listener to the delete button on the new post using the `deletePost` function. */
     let createPost = function(){
         let newPostForm = $('#new-post-form');
 
@@ -41,6 +47,12 @@
     // method to create a post in DOM
     let newPostDom = function(post){
         // CHANGE :: show the count of zero likes on this post
+        /* This code is defining a function `newPostDom` that creates a new post element in the DOM. It
+        returns a jQuery object that represents an HTML `li` element with an `id` attribute set to
+        `post-${post._id}`. The `li` element contains a `p` element with the post content, user
+        name, and a link to toggle likes. It also contains a `div` element with class
+        `post-comments` that contains a form to add comments and a `ul` element to display comments.
+        The `post._id` value is used to set various attributes and values in the HTML elements. */
         return $(`<li id="post-${post._id}">
                     <p>
                         
@@ -84,6 +96,10 @@
 
 
     // method to delete a post from DOM
+    /**
+     * The function deletes a post using an AJAX request and displays a success message using Noty.
+     * @param deleteLink - A jQuery selector for the link that triggers the deletion of a post.
+     */
     let deletePost = function(deleteLink){
         $(deleteLink).click(function(e){
             e.preventDefault();
@@ -114,6 +130,9 @@
 
 
     // loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class we've created) to the delete button of each
+    /**
+     * The function converts posts to AJAX and initializes post comments.
+     */
     let convertPostsToAjax = function(){
         $('#posts-list-container>ul>li').each(function(){
             let self = $(this);
@@ -128,6 +147,12 @@
 
 
 
+    /* `createPost()` is a function that submits a new post form using AJAX. It selects the form
+    element with the ID `new-post-form`, prevents the default form submission behavior, and sends a
+    POST request to the server at the URL `/posts/create` with the serialized form data. If the
+    request is successful, it creates a new post element using the `newPostDom` function and
+    prepends it to the list of posts on the page. It also attaches a click event listener to the
+    delete button on the new post using the `deletePost` function. */
     createPost();
     convertPostsToAjax();
 }

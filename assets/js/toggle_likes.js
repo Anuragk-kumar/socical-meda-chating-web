@@ -1,4 +1,10 @@
-// CHANGE :: create a class to toggle likes when a link is clicked, using AJAX
+
+/* This is a class definition in JavaScript that creates an object called `ToggleLike`. The
+`constructor` method takes in a parameter `toggleElement` and assigns it to the property
+`this.toggler`. It then calls the `toggleLike()` method which attaches a click event listener to the
+`toggleElement`. When the element is clicked, an AJAX request is sent to the server to toggle the
+like status of the item. The response from the server is used to update the like count displayed on
+the page. */
 class ToggleLike{
     constructor(toggleElement){
         this.toggler = toggleElement;
@@ -10,8 +16,9 @@ class ToggleLike{
         $(this.toggler).click(function(e){
             e.preventDefault();
             let self = this;
-
-            // this is a new way of writing ajax which you might've studied, it looks like the same as promises
+            /* This code is sending an AJAX POST request to the server using jQuery's `$.ajax()`
+            method. The request is being sent to the URL specified in the `href` attribute of the
+            `toggleElement` that was clicked. */
             $.ajax({
                 type: 'POST',
                 url: $(self).attr('href'),

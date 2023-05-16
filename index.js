@@ -1,8 +1,17 @@
+const dotenv= require('dotenv').config({path: '.env'});
 // Entery point for Express
 const express = require('express');
+
+// import enviroment path
+const env = require('./config/environment');
+
+// import morgan ;
+const logger = require('morgan');
+
 // require Cookie parser
 const cookieParser = require('cookie-parser');
 const app = express();
+require('./config/view-helpers')(app);
 const port = 8000;
 // require Express-ejs layouts libriary
 const expressLayouts = require('express-ejs-layouts');
@@ -30,21 +39,25 @@ const flash = require('connect-flash');
 // require Connect Flash Middleware
 const customMware = require('./config/middleware');
 
-
-
+// require socket.io
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chat server listening on port 5000');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
 
-
-
-
 //set up static file
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path)); 
 app.use(expressLayouts);
 
 // make the uploads path available to the browser
 app.use('/uploads',express.static(__dirname + '/uploads'));
+
+
+
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 
 
@@ -62,7 +75,7 @@ app.set('views','./views');
 app.use(session({
     name:'chirphub',
     // tod change the secret before deployment  in production mode
-    secret:'blahsomething',
+    secret: env.session_cookie_key,
     resave: false,
     cookie:{
         maxAge:(1000*60*100)

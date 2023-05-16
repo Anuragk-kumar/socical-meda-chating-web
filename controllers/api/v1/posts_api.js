@@ -1,11 +1,11 @@
-const Post = require('../../../models/posts');
+const Post = require('../../../models/post');
 const Comment = require('../../../models/comment');
 
 
 module.exports.index = async function(req,res){
 
 
-    let posts =await Post.find({})
+  let posts = await Post.find({})
   .sort('-createdAt')
   .populate('user')
   .populate({
@@ -21,6 +21,9 @@ module.exports.index = async function(req,res){
     })
 }
 
+/* This code exports a function named `destory` as a property of the `module.exports` object. The
+function is an asynchronous function that takes two parameters `req` and `res` which represent the
+request and response objects respectively. */
 module.exports.destory = async function(req,res){
    
     try{

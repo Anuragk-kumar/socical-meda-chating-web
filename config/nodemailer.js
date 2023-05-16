@@ -1,18 +1,13 @@
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
+const env = require('./environment');
 
-
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smpt.gmail.com',
-    port: 587,
-    secure:false,
-    auth:{
-        user:'akloveme123@gmail.com',
-        pass:'layxbofrgujvfalp'
-    }
-});
+/* This code is creating a nodemailer transporter object that will be used to send emails using the
+Gmail service. The transporter object is configured with the Gmail SMTP server settings, including
+the host, port, and authentication credentials (email and password). The `secure` option is set to
+`false` to indicate that the connection to the SMTP server should not use SSL/TLS encryption. */
+let transporter = nodemailer.createTransport(env.smtp);
 
 
 
