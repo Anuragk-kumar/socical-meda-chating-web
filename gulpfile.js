@@ -28,6 +28,12 @@ gulp.task('css', function(done){
 });
 
 
+/* This code defines a Gulp task named 'js' that minifies all JavaScript files in the './assets'
+directory and its subdirectories using the 'gulp-uglify-es' plugin. It then adds a revision hash to
+the filename using the 'gulp-rev' plugin and generates a manifest file that maps the original
+filenames to the new hashed filenames. Finally, it saves the minified and hashed files to the
+'./public/assets' directory and the manifest file to the same directory. The 'done()' function is
+called to signal the completion of the task. */
 gulp.task('js', function(done){
     console.log('minifying js...');
      gulp.src('./assets/**/*.js')
@@ -43,6 +49,12 @@ gulp.task('js', function(done){
 });
 
 
+/* This task is compressing images using the `gulp-imagemin` plugin. It selects all image files with
+extensions `.png`, `.jpg`, `.gif`, `.svg`, and `.jpeg` from the `./assets` directory and its
+subdirectories, compresses them, and saves them to the `./public/assets` directory. It also adds a
+revision hash to the filename using the `gulp-rev` plugin and generates a manifest file that maps
+the original filenames to the new hashed filenames. Finally, it saves the manifest file to the
+`./public/assets` directory. The `done()` function is called to signal the completion of the task. */
 gulp.task('images', function(done){
     console.log('compressing images...');
     gulp.src('./assets/**/*.+(png|jpg|gif|svg|jpeg)')
